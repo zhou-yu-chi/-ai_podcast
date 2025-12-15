@@ -8,14 +8,14 @@ import edge_tts
 from pydub import AudioSegment
 from tempfile import NamedTemporaryFile
 
-# --- 頁面設定 ---
+# 頁面設定 
 st.set_page_config(
     page_title="Podcast AI Studio",
     page_icon="🎙️",
     layout="wide"  # 改為寬版面，視覺更開闊
 )
 
-# --- CSS 優化 
+# CSS 優化 
 st.markdown("""
 <style>
     .stChatInput {position: fixed; bottom: 30px;}
@@ -32,13 +32,13 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- 初始化 Session State
+# 初始化 Session State
 if 'script_data' not in st.session_state:
     st.session_state.script_data = None
 if 'audio_file' not in st.session_state:
     st.session_state.audio_file = None
 
-# --- 側邊欄：設定區 ---
+# 側邊欄：設定區 ---
 with st.sidebar:
     st.image("https://cdn-icons-png.flaticon.com/512/2628/2628834.png", width=100)
     st.title("⚙️ 工作室設定")
@@ -64,7 +64,7 @@ with st.sidebar:
     alex_voice = voice_options[alex_voice_name]
     jamie_voice = voice_options[jamie_voice_name]
 
-# --- 核心功能
+# 核心功能
 def get_web_content(url):
     jina_url = f"https://r.jina.ai/{url}"
     try:
