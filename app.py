@@ -12,7 +12,7 @@ from tempfile import NamedTemporaryFile
 st.set_page_config(
     page_title="Podcast AI Studio",
     page_icon="🎙️",
-    layout="wide"  # 改為寬版面，視覺更開闊
+    layout="wide"  
 )
 
 # CSS 優化 
@@ -38,7 +38,7 @@ if 'script_data' not in st.session_state:
 if 'audio_file' not in st.session_state:
     st.session_state.audio_file = None
 
-# 側邊欄：設定區 ---
+# 側邊欄：設定區 
 with st.sidebar:
     st.image("https://cdn-icons-png.flaticon.com/512/2628/2628834.png", width=100)
     st.title("⚙️ 工作室設定")
@@ -151,19 +151,19 @@ def process_audio(script_json, v_alex, v_jamie):
         
     return combined
 
-# --- 主介面 Layout ---
+#  主介面 Layout 
 
 st.markdown('<p class="main-header">🎙️ AI Podcast Studio</p>', unsafe_allow_html=True)
 st.markdown('<p class="sub-header">將任何文章轉換為生動的雙人對談</p>', unsafe_allow_html=True)
 
-# 步驟 1: 輸入與腳本生成
+# 輸入與腳本生成
 col1, col2 = st.columns([2, 1])
 
 with col1:
     url_input = st.text_input("🔗 貼上文章連結", placeholder="https://...")
 
 with col2:
-    st.write("") # Spacer
+    st.write("") 
     st.write("") 
     generate_btn = st.button("✨ 第一步：生成腳本")
 
@@ -173,11 +173,11 @@ if generate_btn and url_input and openai_api_key:
         if content:
             script = generate_script(content)
             st.session_state.script_data = script
-            st.session_state.audio_file = None # 重置舊音檔
+            st.session_state.audio_file = None 
         else:
             st.error("無法讀取文章")
 
-# 步驟 2: 腳本預覽與音訊合成 (使用 Chat UI)
+# 腳本預覽與音訊合成
 if st.session_state.script_data:
     st.divider()
     st.subheader("📝 腳本預覽")
@@ -207,7 +207,7 @@ if st.session_state.script_data:
 
     st.divider()
     
-    # 步驟 3: 合成按鈕 (置中)
+    #  合成按鈕
     c1, c2, c3 = st.columns([1, 2, 1])
     with c2:
         start_audio_btn = st.button("🎧 第二步：確認腳本並合成語音")
@@ -216,11 +216,11 @@ if st.session_state.script_data:
         with st.spinner("正在錄音室合成中 (TTS)..."):
             final_audio = process_audio(st.session_state.script_data, alex_voice, jamie_voice)
             
-            # 存到 session state 避免重新整理後不見
+           
             out_file = "podcast_final.mp3"
             final_audio.export(out_file, format="mp3")
             st.session_state.audio_file = out_file
-            st.rerun() # 重新整理頁面以顯示播放器
+            st.rerun() 
 
 # 顯示播放器與下載
 if st.session_state.audio_file:
