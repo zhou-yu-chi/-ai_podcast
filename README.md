@@ -66,4 +66,3 @@ pip install streamlit openai edge-tts pydub requests python-dotenv
 
 ### 2. 安裝依賴套件
 pip install streamlit openai edge-tts pydub requests python-dotenv
->>>>>>> 6738c5d526e171119a7245e83ea25c71c768acfc
